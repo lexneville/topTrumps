@@ -288,6 +288,29 @@ const displayCard = () => {
         5. ${deckStats[5]} : ${playerOneDeck[0].stat5Value}
         Please choose a statistic 1-5!`);
         return playerChoice;
+    }
+    
+    else if (controlPlayer == "CPU") {
+        console.log("Display player two card initiated");
+        playerChoices = [0,
+            playerTwoDeck[0].stat1Value,
+            playerTwoDeck[0].stat2Value,
+            playerTwoDeck[0].stat3Value,
+            playerTwoDeck[0].stat4Value,
+            playerTwoDeck[0].stat5Value,
+        ];
+        playerOneStat = [0,
+            playerOneDeck[0].stat1Value,
+            playerOneDeck[0].stat2Value,
+            playerOneDeck[0].stat3Value,
+            playerOneDeck[0].stat4Value,
+            playerOneDeck[0].stat5Value
+        ];
+        
+        playerChoice = (Math.ceil(Math.random() * 5));
+        alert(`CPU has chosen ${deckStats[playerChoice]}`) 
+        return playerChoice;
+      
     } 
     
     else if (controlPlayer == playerTwoName) {
@@ -333,10 +356,12 @@ function game() {
     // if player one wins the round, shift() player two's card into the last slot of player one's deck array                                     
         if (playerTwoDeck.length == 0) {
             alert(`Player One Wins! The game is over!`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
         }
 
         else if (playerOneDeck.length == 0) {
-            alert(`Player One Wins! The game is over!`);
+            alert(`Player Two Wins! The game is over!`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
         }   
         
         else if  ((controlPlayer == playerOneName) &&
@@ -353,6 +378,7 @@ function game() {
             alert(`${playerOneName} has won this round.`);
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`); 
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
             console.log(limboDeck); 
 
 
@@ -371,6 +397,8 @@ function game() {
             alert(`${playerTwoName} has won this round.`);
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
+
             controlPlayer  = playerTwoName;
             answeringPlayer = playerOneName;
             console.log(limboDeck);
@@ -381,9 +409,11 @@ function game() {
 
             playerOneDeck.push(playerTwoDeck[0]);
             playerTwoDeck.splice(0, 1);
-            for(i=0;i<limboDeck.length;i++){
+            for(i=0;i<limboDeck.length;){
                 playerOneDeck.push(limboDeck[0]);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
                 limboDeck.splice(0,1);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
             }
 
             let heldCard = playerOneDeck[0];
@@ -393,6 +423,7 @@ function game() {
             alert(`${playerOneName} has won this round and also the limbo cards.`);                
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
             console.log(limboDeck);
         }    
 
@@ -401,9 +432,11 @@ function game() {
 
             playerTwoDeck.push(playerOneDeck[0]);
             playerOneDeck.splice(0, 1);
-            for(i=0;i<limboDeck.length;i++){
+            for(i=0;i<limboDeck.length;){
                 playerTwoDeck.push(limboDeck[0]);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
                 limboDeck.splice(0,1);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
             }
 
             let heldCard = playerTwoDeck[0];
@@ -415,6 +448,7 @@ function game() {
             answeringPlayer = playerOneName;
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
             console.log(limboDeck);
 
         }
@@ -431,6 +465,7 @@ function game() {
             alert(`This round is a draw, cards moved to limbo.`);
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
             console.log(limboDeck);
             // return
         }
@@ -451,6 +486,8 @@ function game() {
             alert(`${playerTwoName} has won this round.`);
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);
+            alert(`There are ${limboDeck.length} cards in limbo.`)           
+
             
             // return
         }
@@ -466,6 +503,10 @@ function game() {
             playerOneDeck.push(heldCard); 
 
             alert(`${playerOneName} has won this round.`);
+            alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
+            alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`); 
+            alert(`There are ${limboDeck.length} cards in limbo.`)  
+
             controlPlayer  = playerOneName;
             answeringPlayer = playerTwoName;
             // return
@@ -477,10 +518,12 @@ function game() {
             playerTwoDeck.push(playerOneDeck[0]);
             playerOneDeck.splice(0, 1);
 
-            for(i=0;i<limboDeck.length;i++){
+            for(i=0;i<limboDeck.length;){
                 playerTwoDeck.push(limboDeck[0]);
                 limboDeck.splice(0,1);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
                 console.log(limboDeck);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
             }
 
             let heldCard = playerTwoDeck[0];
@@ -490,7 +533,8 @@ function game() {
 
             alert(`${playerTwoName} has won this round and also the limbo cards.`);
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
-            alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);            
+            alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`); 
+            alert(`There are ${limboDeck.length} cards in limbo.`)           
             // return
         }
 
@@ -506,10 +550,11 @@ function game() {
             playerOneDeck.push(heldCard); 
 
 
-            for(i=0;i<limboDeck.length;i++){
+            for(i=0;i<limboDeck.length;){
                 playerOneDeck.push(limboDeck[0]);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
                 limboDeck.splice(0,1);
-                alert(limboDeck);
+                alert(`There are ${limboDeck.length} cards in limbo.`) 
             }
 
             alert(`${playerOneName} has won this round and also the limbo cards.`);
@@ -517,6 +562,7 @@ function game() {
             answeringPlayer = playerTwoName;
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
             // return
         }
         
@@ -532,6 +578,7 @@ function game() {
             alert(`This round is a draw, cards moved to limbo.`);
             alert(`${playerOneName} has ${playerOneDeck.length} cards.`);
             alert(`${playerTwoName} has ${playerTwoDeck.length} cards.`);
+            alert(`There are ${limboDeck.length} cards in limbo.`) 
             // return
         }  
             
@@ -560,6 +607,10 @@ function game() {
 // console.log(playerTwoDeck);
 // displayCard();
 game();
+
+
+
+
 
 
 
